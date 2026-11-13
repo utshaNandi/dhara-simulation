@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f9f7f1;
+  --color-graphite: #2b2b2b;
+  --color-charcoal: #4a4a4a;
+  --color-muted-grey: #888888;
+  --color-accent-blue: #6d8ba6;
+  --color-accent-green: #7a8b75;
+  --color-accent-rust: #a75d50;
+  --color-accent-amber: #c99355;
+  
+  --font-serif: var(--font-lora), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-hand: var(--font-caveat), cursive;
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-graphite font-serif antialiased;
+    background-image: 
+      linear-gradient(to right, rgba(43, 43, 43, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(43, 43, 43, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-graphite;
+  }
+}
+
+/* Custom hand-drawn borders adapted from Salmonella */
+.border-hand {
+  border: 1px solid rgba(43, 43, 43, 0.2);
+  border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
+}
+
+.border-hand-b {
+  border-bottom: 1px solid rgba(43, 43, 43, 0.2);
+  border-bottom-right-radius: 255px 3px;
+  border-bottom-left-radius: 5px 225px;
+}
+
+/* Subtle hand-drawn divider line */
+.divider-sketch {
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(43, 43, 43, 0.3),
+    rgba(43, 43, 43, 0.3) 10px,
+    transparent 10px,
+    transparent 12px
+  );
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+/* Link underline animation */
+.link-underline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0.5;
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Custom scrollbar for clean notebook appearance */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
